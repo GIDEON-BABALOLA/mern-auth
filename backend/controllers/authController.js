@@ -150,3 +150,15 @@ export const logout = async (req, res) => {
     res.clearCookie("token");
     res.status(200).json({success: true, message : "Logged out successfully"});
 }
+export const checkAuth = async (req, res) => {
+    try{
+const user = await User.findById(req.userId).select("-password");
+if(!user){
+    return res.status(400).json({success: false, message: "user not found"});
+}
+res.status(200).json({ success: true, user: user})
+    }catch(error){
+console.log("Error in checkAuth", error);
+res.status(400).json({ success: false, message: error.message})
+    }
+}
