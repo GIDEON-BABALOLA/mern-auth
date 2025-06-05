@@ -4,6 +4,7 @@ import SignUpPage from './pages/SignUpPage'
 import EmailVerificationPage from './pages/EmailVerificationPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import NotFoundPage from './pages/NotFoundPage'
 import LoadingSpinner from "./component/LoadingSpinner"
 import DashboardPage from "./pages/DashboardPage"
 import { Routes, Route } from "react-router-dom"
@@ -30,6 +31,9 @@ const RedirectAuthenticatedUser = ({children}) => {
     return <Navigate to="/" replace/>
   }
   return children
+}
+const RedirectUnknownRoute = () => {
+  return  <Navigate to="/" replace/>
 }
 function App() {
   const { isCheckingAuth, checkAuth } = useAuthStore();
@@ -92,6 +96,14 @@ element={
   <RedirectAuthenticatedUser>
     <ResetPasswordPage />
   </RedirectAuthenticatedUser>
+}
+>
+</Route>
+{/* Catch all routes */}
+<Route
+path='*'
+element={
+  <RedirectUnknownRoute />
 }
 >
 
