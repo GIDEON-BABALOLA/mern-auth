@@ -2,6 +2,7 @@ import './App.css'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import EmailVerificationPage from './pages/EmailVerificationPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import LoadingSpinner from "./component/LoadingSpinner"
 import DashboardPage from "./pages/DashboardPage"
@@ -24,7 +25,7 @@ return children;
 }
 //redirect authenticated users to the home page
 const RedirectAuthenticatedUser = ({children}) => {
-  const { isAuthenticated, user} = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   if(isAuthenticated && user.isVerified){
     return <Navigate to="/" replace/>
   }
@@ -85,6 +86,16 @@ checkAuth();
                   <ForgotPasswordPage />
                   </RedirectAuthenticatedUser>
 }/>
+<Route
+path='/reset-password/:token'
+element={
+  <RedirectAuthenticatedUser>
+    <ResetPasswordPage />
+  </RedirectAuthenticatedUser>
+}
+>
+
+</Route>
       </Routes>
       <Toaster />
     </div>

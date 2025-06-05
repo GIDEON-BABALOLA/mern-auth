@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "build": "npm install && npm install --prefix ../frontend/client && npm run build --prefix ../frontend/client"
   },
   "keywords": [],
   "author": "",
@@ -14,14 +15,17 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "client": "file:../frontend/client",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mailtrap": "^4.1.0",
-    "mongoose": "^8.15.0"
+    "mongoose": "^8.15.0",
+    "prefix": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
